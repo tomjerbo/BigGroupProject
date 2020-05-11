@@ -34,8 +34,6 @@ public class FlowerGrow : MonoBehaviour
                 anim.SetFloat("Grow", 0f);
             }
         }
-
-        anim.playbackTime = 1f;
     }
 }
 
