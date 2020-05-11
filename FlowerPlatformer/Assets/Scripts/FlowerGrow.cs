@@ -25,7 +25,7 @@ public class FlowerGrow : MonoBehaviour
         }
         else
         {
-            if (anim.GetFloat("Grow") >= 1)
+            if (anim.GetFloat("Grow") > 0)
             {
                 anim.SetFloat("Grow", anim.GetFloat("Grow") - (growSpeed * Time.deltaTime));
             }
@@ -34,6 +34,8 @@ public class FlowerGrow : MonoBehaviour
                 anim.SetFloat("Grow", 0f);
             }
         }
+
+        anim.playbackTime = 1f;
     }
 }
 
