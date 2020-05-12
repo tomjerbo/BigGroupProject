@@ -8,10 +8,17 @@ public class FlowerGrow : MonoBehaviour
     public bool grow = false;
     public float growSpeed = 10f;
 
+    private void Awake()
+    {
+        anim.SetFloat("Grow", 0f);
+    }
+
+    public void ToggleFlower()
+    {
+        grow = !grow;
+    }
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Space)) grow = !grow;
-
         if (grow)
         {
             if (anim.GetFloat("Grow") < 1)
