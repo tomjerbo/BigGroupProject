@@ -29,6 +29,12 @@ public class FlowerPlanter : MonoBehaviour
         }
     }
 
+    public void SetFlowerToPlant(GameObject newFlower)
+    {
+        flower = newFlower;
+    }
+
+
     // Method for planting the flower
     private void PlantFlower(Vector3 location, Vector3 direction)
     {

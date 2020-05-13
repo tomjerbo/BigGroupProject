@@ -329,7 +329,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   anim: {fileID: 3727747498059164443}
-  grow: 0
+  grow: 1
   growSpeed: 0.5
 --- !u!95 &3727747498059164443
 Animator:

@@ -12,6 +12,7 @@ public class ShittyMovement : MonoBehaviour
     [SerializeField] private LayerMask whatIsGround = default;
     [SerializeField] private float jumpForce = 8f;
     private bool canJump = true;
+    private bool onLadder = false;
 
     private void Awake()
     {
@@ -36,7 +37,13 @@ public class ShittyMovement : MonoBehaviour
         Vector3 moveV = transform.forward * Input.GetAxis("Vertical");
         Vector3 moveH = transform.right * Input.GetAxis("Horizontal");
 
-        rb.MovePosition(transform.position + ((moveV + moveH) * moveSpeed * Time.deltaTime));
+        if (onLadder)
+        {
+            moveV = transform.up * Input.GetAxis("Vertical");
+        }
+
+        rb.MovePosition(transform.position + ((moveV + moveH) * moveSpeed * Time.deltaTime)); 
+
     }
 
     private void Rotate()
@@ -66,4 +73,22 @@ public class ShittyMovement : MonoBehaviour
         if (collision.collider.gameObject.layer == whatIsGround) { canJump = false; }
     }
 
+    private void OnTriggerStay(Collider other)
+    {
+        if (other.gameObject.layer == LayerMask.NameToLayer("Ladder"))
+        {
+            onLadder = true;
+            rb.velocity = Vector3.zero;
+            rb.useGravity = false;
+        }
+    }
+
+    private void OnTriggerExit(Collider other)
+    {
+        if (other.gameObject.layer == LayerMask.NameToLayer("Ladder"))
+        {
+            onLadder = false;
+            rb.useGravity = true;
+        }
+    }
 }
