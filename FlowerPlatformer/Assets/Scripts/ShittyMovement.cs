@@ -39,7 +39,7 @@ public class ShittyMovement : MonoBehaviour
 
         if (onLadder)
         {
-            moveV = transform.up * Input.GetAxis("Vertical");
+            moveV = home.forward * Input.GetAxis("Vertical");
         }
 
         rb.MovePosition(transform.position + ((moveV + moveH) * moveSpeed * Time.deltaTime)); 
@@ -59,18 +59,20 @@ public class ShittyMovement : MonoBehaviour
     {
         if (canJump)
         {
-            rb.AddExplosionForce(jumpForce, transform.position, 1f, 5f, ForceMode.Impulse);
+            if (onLadder) rb.AddForce(home.forward * jumpForce, ForceMode.Impulse);
+            else rb.AddExplosionForce(jumpForce, transform.position, 1f, 5f, ForceMode.Impulse);
+            canJump = false;
         }
     }
 
     private void OnCollisionEnter(Collision collision)
     {
-        if (collision.collider.gameObject.layer == whatIsGround) { canJump = true; }
+        if (collision.collider.gameObject.layer == LayerMask.NameToLayer("Ground")) { canJump = true; }
     }
 
     private void OnCollisionExit(Collision collision)
     {
-        if (collision.collider.gameObject.layer == whatIsGround) { canJump = false; }
+        if (collision.collider.gameObject.layer == LayerMask.NameToLayer("Ground")) { canJump = false; }
     }
 
     private void OnTriggerStay(Collider other)
@@ -78,7 +80,7 @@ public class ShittyMovement : MonoBehaviour
         if (other.gameObject.layer == LayerMask.NameToLayer("Ladder"))
         {
             onLadder = true;
-            rb.velocity = Vector3.zero;
+            rb.velocity = rb.velocity * 0.95f;
             rb.useGravity = false;
         }
     }
