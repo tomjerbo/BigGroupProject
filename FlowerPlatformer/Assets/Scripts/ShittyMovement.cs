@@ -9,8 +9,9 @@ public class ShittyMovement : MonoBehaviour
     [SerializeField] private float rotSpeed = 100f;
     [SerializeField] private Rigidbody rb = default;
     [SerializeField] private Transform home = default;
-    [SerializeField] private LayerMask whatIsGround = default;
     [SerializeField] private float jumpForce = 8f;
+    private float jumpCD = 0.2f;
+    private float jumpTimer = 0f;
     private bool canJump = true;
     private bool onLadder = false;
 
@@ -26,6 +27,15 @@ public class ShittyMovement : MonoBehaviour
         Rotate();
         if (Input.GetKeyDown(KeyCode.Space)) 
             Jump();
+
+        if (jumpTimer <= 0)
+        {
+            CheckForGround();
+        }
+        else
+        {
+            jumpTimer -= Time.deltaTime;
+        }
     }
     void FixedUpdate()
     {
@@ -62,25 +72,42 @@ public class ShittyMovement : MonoBehaviour
             if (onLadder) rb.AddForce(home.forward * jumpForce, ForceMode.Impulse);
             else rb.AddExplosionForce(jumpForce, transform.position, 1f, 5f, ForceMode.Impulse);
             canJump = false;
+            jumpTimer = jumpCD;
+            if (onLadder) jumpTimer += jumpCD;
         }
     }
 
-    private void OnCollisionEnter(Collision collision)
+    private void CheckForGround()
     {
-        if (collision.collider.gameObject.layer == LayerMask.NameToLayer("Ground")) { canJump = true; }
+        RaycastHit[] hits = Physics.BoxCastAll(transform.position + Vector3.down, Vector3.one * 0.5f, transform.up, Quaternion.identity);
+        for (int i = 0; i < hits.Length; i++)
+        {
+            if (   hits[i].collider.gameObject.layer == LayerMask.NameToLayer("Ground") 
+                || hits[i].collider.gameObject.layer == LayerMask.NameToLayer("Rock")
+                || hits[i].collider.gameObject.layer == LayerMask.NameToLayer("Ladder"))
+                { 
+                    canJump = true; 
+                    //print("Can Jump");
+                }
+        }
     }
 
-    private void OnCollisionExit(Collision collision)
-    {
-        if (collision.collider.gameObject.layer == LayerMask.NameToLayer("Ground")) { canJump = false; }
-    }
+    //private void OnCollisionStay(Collision collision)
+    //{
+    //    if (collision.gameObject.layer == LayerMask.NameToLayer("Ground") || collision.gameObject.layer == LayerMask.NameToLayer("Rock")) { canJump = true; }
+    //}
+
+    //private void OnCollisionExit(Collision collision)
+    //{
+    //    if (collision.gameObject.layer == LayerMask.NameToLayer("Ground") || collision.gameObject.layer == LayerMask.NameToLayer("Rock")) { canJump = false; }
+    //}
 
     private void OnTriggerStay(Collider other)
     {
         if (other.gameObject.layer == LayerMask.NameToLayer("Ladder"))
         {
             onLadder = true;
-            rb.velocity = rb.velocity * 0.95f;
+            rb.velocity = rb.velocity * 0.9f;
             rb.useGravity = false;
         }
     }
@@ -92,5 +119,11 @@ public class ShittyMovement : MonoBehaviour
             onLadder = false;
             rb.useGravity = true;
         }
+    }
+
+    private void OnDrawGizmos()
+    {
+        Gizmos.color = Color.red;
+        Gizmos.DrawWireCube(transform.position - transform.up, Vector3.one * 0.5f);
     }
 }

@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class FlowerGrow : MonoBehaviour
+public class LadderGrow : MonoBehaviour
 {
     public Animator anim;
     public bool grow = false;
@@ -11,7 +11,7 @@ public class FlowerGrow : MonoBehaviour
     private void Awake()
     {
         anim.SetFloat("Grow", 0f);
-        PlayerFlowerController.instance.oldFlower = this.gameObject;
+        PlayerFlowerController.instance.oldLadder = this.gameObject;
     }
 
     public void ToggleFlower()

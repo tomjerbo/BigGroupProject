@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 4720271892853320666}
   - component: {fileID: 4720271892853320667}
   - component: {fileID: 4720271892853320664}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Cube (2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -105,7 +105,7 @@ GameObject:
   - component: {fileID: 4720271894383994249}
   - component: {fileID: 4720271894383994254}
   - component: {fileID: 4720271894383994255}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Cube (4)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -197,7 +197,7 @@ GameObject:
   - component: {fileID: 4720271894413747288}
   - component: {fileID: 4720271894413747289}
   - component: {fileID: 4720271894413747294}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: TallFlower
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -265,7 +265,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4720271894788247854}
   - component: {fileID: 4720271894788247855}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Point Light
   m_TagString: Untagged
   m_Icon: {fileID: 0}

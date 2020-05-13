@@ -4,16 +4,26 @@ using UnityEngine;
 
 public class PlayerFlowerController : MonoBehaviour
 {
-    [SerializeField] GameObject[] Flowers = default;
+    public static PlayerFlowerController instance;
+    //[SerializeField] GameObject[] Flowers = default;
+    [SerializeField] GameObject Flower = default;
     [SerializeField] GameObject Ladder = default;
     [SerializeField] GameObject fakeSeedBall = default;
     [SerializeField] GameObject seedBallPrefab = default;
     [SerializeField] GameObject fakeLadderBall = default;
     [SerializeField] GameObject seedLadderPrefab = default;
-    [SerializeField] private float throwForce;
-    [SerializeField] private float reloadCD;
-    private float flowerReload;
-    private float ladderReload;
+    [SerializeField] private float throwForce = 10f;
+    [SerializeField] private float reloadCD = 1f;
+    private float flowerReload = 0;
+    private float ladderReload = 0;
+
+    public GameObject oldFlower = null;
+    public GameObject oldLadder = null;
+
+    private void Awake()
+    {
+        instance = this;
+    }
     void Update()
     {
         ThrowSeedBall();
@@ -27,9 +37,11 @@ public class PlayerFlowerController : MonoBehaviour
             fakeSeedBall.SetActive(true);
             if (Input.GetMouseButtonDown(0))
             {
+                if (oldFlower != null) oldFlower.GetComponent<FlowerGrow>().RemoveOld();
                 GameObject ball = Instantiate(seedBallPrefab, fakeSeedBall.transform.position, fakeSeedBall.transform.rotation);
                 ball.GetComponent<Rigidbody>().AddForce(GetComponentInChildren<Camera>().transform.forward * throwForce, ForceMode.Impulse);
-                ball.GetComponent<FlowerPlanter>().SetFlowerToPlant(Flowers[Random.Range(0, Flowers.Length)]);
+                ball.GetComponent<FlowerPlanter>().SetFlowerToPlant(Flower);
+                Destroy(ball, 2f);
                 flowerReload = reloadCD;
                 fakeSeedBall.SetActive(false);
             }
@@ -47,9 +59,11 @@ public class PlayerFlowerController : MonoBehaviour
             fakeLadderBall.SetActive(true);
             if (Input.GetMouseButtonDown(1))
             {
+                if (oldLadder != null) oldLadder.GetComponent<LadderGrow>().RemoveOld();
                 GameObject ball = Instantiate(seedLadderPrefab, fakeLadderBall.transform.position, fakeLadderBall.transform.rotation);
                 ball.GetComponent<Rigidbody>().AddForce(GetComponentInChildren<Camera>().transform.forward * throwForce, ForceMode.Impulse);
-                ball.GetComponent<FlowerPlanter>().SetFlowerToPlant(Ladder);
+                ball.GetComponent<LadderPlacer>().SetFlowerToPlant(Ladder);
+                Destroy(ball, 2f);
                 ladderReload = reloadCD;
                 fakeLadderBall.SetActive(false);
             }
