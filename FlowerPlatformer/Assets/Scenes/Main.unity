@@ -528,7 +528,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moveSpeed: 5
-  rotSpeed: 150
+  rotSpeed: 500
   rb: {fileID: 333080397}
   home: {fileID: 1608784671}
   jumpForce: 8
