@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 737165680318864454}
-  m_Layer: 9
+  m_Layer: 12
   m_Name: TallFlower 1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
