@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using Toolkit;
 
 public class ShittyMovement : MonoBehaviour
 {
@@ -10,6 +11,7 @@ public class ShittyMovement : MonoBehaviour
     [SerializeField] private Rigidbody rb = default;
     [SerializeField] private Transform home = default;
     [SerializeField] private float jumpForce = 8f;
+    [SerializeField] private LayerMask jumpableLayers = default;
     private float jumpCD = 0.2f;
     private float jumpTimer = 0f;
     private bool canJump = true;
@@ -82,25 +84,13 @@ public class ShittyMovement : MonoBehaviour
         RaycastHit[] hits = Physics.BoxCastAll(transform.position + Vector3.down, Vector3.one * 0.5f, transform.up, Quaternion.identity);
         for (int i = 0; i < hits.Length; i++)
         {
-            if (   hits[i].collider.gameObject.layer == LayerMask.NameToLayer("Ground") 
-                || hits[i].collider.gameObject.layer == LayerMask.NameToLayer("Rock")
-                || hits[i].collider.gameObject.layer == LayerMask.NameToLayer("Ladder"))
-                { 
-                    canJump = true; 
-                    //print("Can Jump");
-                }
+            if (hits[i].collider.gameObject.layer.Contains(jumpableLayers))
+            { 
+                canJump = true; 
+                //print("Can Jump");
+            }
         }
     }
-
-    //private void OnCollisionStay(Collision collision)
-    //{
-    //    if (collision.gameObject.layer == LayerMask.NameToLayer("Ground") || collision.gameObject.layer == LayerMask.NameToLayer("Rock")) { canJump = true; }
-    //}
-
-    //private void OnCollisionExit(Collision collision)
-    //{
-    //    if (collision.gameObject.layer == LayerMask.NameToLayer("Ground") || collision.gameObject.layer == LayerMask.NameToLayer("Rock")) { canJump = false; }
-    //}
 
     private void OnTriggerStay(Collider other)
     {
@@ -120,6 +110,8 @@ public class ShittyMovement : MonoBehaviour
             rb.useGravity = true;
         }
     }
+
+    
 
     private void OnDrawGizmos()
     {

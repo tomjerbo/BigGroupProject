@@ -24,6 +24,8 @@ public class SeedAiming : MonoBehaviour
     private int plantIndex = 0;
     [SerializeField] private Slider energyBar = default;
     [SerializeField] private ShittyMovement body = default;
+    private bool showAim = false;
+
 
     private void AimRaycast()
     {
@@ -39,6 +41,8 @@ public class SeedAiming : MonoBehaviour
         CheckForTargets(plant, plantable, realPlant);
         CheckForTargets(ladder, ladderPlantable, realLadder);
         energyBar.value = energy;
+        ShowAim();
+        
     }
 
     private void CheckForTargets(LayerMask filled, LayerMask empty, GameObject prefab)
@@ -91,10 +95,46 @@ public class SeedAiming : MonoBehaviour
         }
     }
 
+    private void ShowAim()
+    {
+        if (Input.GetKeyDown(KeyCode.F))
+            showAim = !showAim;
+
+        if (showAim)
+        {
+            if (Physics.Raycast(checkPlant, out RaycastHit fakePlant, range, plantable, QueryTriggerInteraction.Collide))
+            {
+                ghostPlant.SetActive(true);
+                ghostPlant.transform.position = fakePlant.point;
+                ghostPlant.transform.rotation = Quaternion.LookRotation(fakePlant.normal);
+            }
+            else
+            {
+                ghostPlant.SetActive(false);
+            }
+            if (Physics.Raycast(checkPlant, out RaycastHit fakeLadder, range, ladderPlantable, QueryTriggerInteraction.Collide))
+            {
+                ghostLadder.SetActive(true);
+                ghostLadder.transform.position = fakeLadder.point;
+                ghostLadder.transform.rotation = Quaternion.LookRotation(fakeLadder.normal);
+            }
+            else
+            {
+                ghostLadder.SetActive(false);
+            }
+        }
+        else
+        {
+            ghostPlant.SetActive(false);
+            ghostLadder.SetActive(false);
+        }
+    }
+
+
 
     private void Plant(RaycastHit hitDirt, GameObject obj)
     {
-        Instantiate(obj, hitDirt.point, Quaternion.LookRotation(hitDirt.normal));
+        Instantiate(obj, hitDirt.point, Quaternion.LookRotation(hitDirt.normal, Vector3.up));
         energy -= plantCost;
     }
 
