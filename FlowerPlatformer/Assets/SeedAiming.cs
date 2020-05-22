@@ -14,12 +14,16 @@ public class SeedAiming : MonoBehaviour
     private Ray checkDirt;
     [SerializeField] private LayerMask plantable = default;
     [SerializeField] private LayerMask plant = default;
+    [SerializeField] private LayerMask ladderPlantable = default;
+    [SerializeField] private LayerMask ladder = default;
+    [SerializeField] private GameObject ghostLadder = default;
+    [SerializeField] private GameObject realLadder = default;
     [SerializeField] private GameObject ghostPlant = default;
     [SerializeField] private GameObject realPlant = default;
     private List<GameObject> Plants = default;
     private int plantIndex = 0;
     [SerializeField] private Slider energyBar = default;
-
+    [SerializeField] private ShittyMovement body = default;
 
     private void AimRaycast()
     {
@@ -32,13 +36,14 @@ public class SeedAiming : MonoBehaviour
     private void Update()
     {
         AimRaycast();
-        CheckForTargets();
+        CheckForTargets(plant, plantable, realPlant);
+        CheckForTargets(ladder, ladderPlantable, realLadder);
         energyBar.value = energy;
     }
 
-    private void CheckForTargets()
+    private void CheckForTargets(LayerMask filled, LayerMask empty, GameObject prefab)
     {
-        if (Physics.Raycast(checkPlant, out RaycastHit hitPlant, range, plant, QueryTriggerInteraction.Collide))
+        if (Physics.Raycast(checkPlant, out RaycastHit hitPlant, range, filled, QueryTriggerInteraction.Collide))
         {
             print("Hit plant");
             if (Input.GetKey(KeyCode.R) && energy > growSpeed * Time.deltaTime)
@@ -61,25 +66,25 @@ public class SeedAiming : MonoBehaviour
                     energy += growSpeed * Time.deltaTime;
                 }
             }
-            if (Input.GetMouseButtonDown(1))
+            if (Input.GetMouseButtonDown(1) && !body.OnLadder())
             {
-                energy += hitPlant.collider.GetComponent<PlantSizeLogic>().energy + 30f;
+                energy += hitPlant.collider.GetComponent<PlantSizeLogic>().energy + plantCost;
                 Destroy(hitPlant.collider.gameObject);
             }
         }
         else
         {
-            if (Physics.Raycast(checkDirt, out RaycastHit hitDirt, range, plantable, QueryTriggerInteraction.Collide))
+            if (Physics.Raycast(checkDirt, out RaycastHit hitDirt, range, empty, QueryTriggerInteraction.Collide))
             {
                 print("Hit dirt");
                 if (Input.GetMouseButtonDown(0) & energy >= plantCost)
                 {
                     print("Planting");
-                    PlantFlower(hitDirt);
+                    Plant(hitDirt, prefab);
                 }
                 else
                 {
-                    if (energy < 30)
+                    if (energy < plantCost)
                         print("Not enough energy to plant another tree.");
                 }
             }
@@ -87,9 +92,9 @@ public class SeedAiming : MonoBehaviour
     }
 
 
-    private void PlantFlower(RaycastHit hitDirt)
+    private void Plant(RaycastHit hitDirt, GameObject obj)
     {
-        Instantiate(realPlant, hitDirt.point, Quaternion.LookRotation(Vector3.up, hitDirt.normal));
+        Instantiate(obj, hitDirt.point, Quaternion.LookRotation(hitDirt.normal));
         energy -= plantCost;
     }
 

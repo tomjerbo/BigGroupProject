@@ -14,7 +14,7 @@ public class ShittyMovement : MonoBehaviour
     private float jumpTimer = 0f;
     private bool canJump = true;
     private bool onLadder = false;
-
+    public bool OnLadder() { return onLadder; }
     private void Awake()
     {
         Cursor.lockState = CursorLockMode.Locked;
