@@ -5,13 +5,17 @@ using UnityEngine;
 public class FlowerGrow : MonoBehaviour
 {
     public Animator anim;
-    public bool grow = false;
+    public bool grow = true;
     public float growSpeed = 10f;
+    public GameObject leaf = default;
+    public float size = 0f;
 
     private void Awake()
     {
         anim.SetFloat("Grow", 0f);
-        PlayerFlowerController.instance.oldFlower = this.gameObject;
+        //PlayerFlowerController.instance.oldFlower = this.gameObject;
+        Instantiate(leaf);
+
     }
 
     public void ToggleFlower()

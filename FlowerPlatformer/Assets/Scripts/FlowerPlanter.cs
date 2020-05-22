@@ -39,9 +39,9 @@ public class FlowerPlanter : MonoBehaviour
     private void PlantFlower(Vector3 location, Vector3 direction)
     {
         // Creates the flower prefab
-        GameObject flr =  Instantiate(flower, location, Quaternion.identity);
+        GameObject flr =  Instantiate(flower, location, Quaternion.LookRotation(location, direction));
         // Sets rotation to it matches the surface direction
-        flr.transform.LookAt(direction);
+        //flr.transform.LookAt(direction);
         // Disables further collisions
         isThrown = false;
     }

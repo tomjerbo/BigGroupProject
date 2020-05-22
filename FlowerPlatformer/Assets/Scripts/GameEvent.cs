@@ -18,4 +18,12 @@ public class GameEvent : MonoBehaviour
             OnDoorProgressTrigger();
     }
 
+
+    public event Action OnRemoveOldPlants;
+
+    public void RemoveOldPlants()
+    {
+        if (OnRemoveOldPlants != null)
+            OnRemoveOldPlants();
+    }
 }
