@@ -172,7 +172,7 @@ GameObject:
   - component: {fileID: 458087123233931279}
   - component: {fileID: 6154163000459787510}
   - component: {fileID: 871464332831462058}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Leaf
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -262,7 +262,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2827833116918268215}
-  m_Layer: 15
+  m_Layer: 0
   m_Name: GameObject
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -296,7 +296,7 @@ GameObject:
   - component: {fileID: 5584464707805765964}
   - component: {fileID: 5584464707805765967}
   - component: {fileID: 5584464707805765965}
-  m_Layer: 15
+  m_Layer: 0
   m_Name: Pivot
   m_TagString: Untagged
   m_Icon: {fileID: 0}
