@@ -54,6 +54,13 @@ public class ShittyMovement : MonoBehaviour
             moveV = home.forward * Input.GetAxis("Vertical");
         }
 
+        if (!canJump)
+        {
+            if (moveH != Vector3.zero)
+                moveH = moveH * 0.35f;
+
+        }
+
         rb.MovePosition(transform.position + ((moveV + moveH) * moveSpeed * Time.deltaTime)); 
 
     }
@@ -81,7 +88,8 @@ public class ShittyMovement : MonoBehaviour
 
     private void CheckForGround()
     {
-        RaycastHit[] hits = Physics.BoxCastAll(transform.position + Vector3.down, Vector3.one * 0.5f, transform.up, Quaternion.identity);
+        canJump = false;
+        RaycastHit[] hits = Physics.BoxCastAll(transform.position + Vector3.down, Vector3.one * 0.35f, transform.up, Quaternion.identity);
         for (int i = 0; i < hits.Length; i++)
         {
             if (hits[i].collider.gameObject.layer.Contains(jumpableLayers))
@@ -116,6 +124,6 @@ public class ShittyMovement : MonoBehaviour
     private void OnDrawGizmos()
     {
         Gizmos.color = Color.red;
-        Gizmos.DrawWireCube(transform.position - transform.up, Vector3.one * 0.5f);
+        Gizmos.DrawWireCube(transform.position - transform.up, Vector3.one * 0.35f);
     }
 }

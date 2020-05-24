@@ -11,9 +11,6 @@ GameObject:
   - component: {fileID: 8217651322430942963}
   - component: {fileID: 1103928270141576389}
   - component: {fileID: 6660113027020826684}
-  - component: {fileID: 3330189348485989309}
-  - component: {fileID: 6532799554682474639}
-  - component: {fileID: 7767798286520161347}
   m_Layer: 2
   m_Name: GrowablePlatform
   m_TagString: Untagged
@@ -83,52 +80,6 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
---- !u!95 &3330189348485989309
-Animator:
-  serializedVersion: 3
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4922908893557103840}
-  m_Enabled: 1
-  m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 6bcce1daf2b02e647a140ea9ba395f73, type: 2}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorControllerStateOnDisable: 0
---- !u!65 &6532799554682474639
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4922908893557103840}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 5.7922983, y: 14.207966, z: 7.136697}
-  m_Center: {x: 0.21243288, y: 5.8419085, z: -0.22159758}
---- !u!114 &7767798286520161347
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4922908893557103840}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d9473382a3c1be24c8e3798ad01cea14, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  size: 0.3
-  energy: 0
 --- !u!1 &5197631767680810312
 GameObject:
   m_ObjectHideFlags: 0
@@ -152,14 +103,14 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5197631767680810312}
-  m_LocalRotation: {x: 0.092519805, y: 0.8613728, z: 0.4697868, w: -0.16963874}
+  m_LocalRotation: {x: -0.09251702, y: -0.86137563, z: -0.46978348, w: 0.1696354}
   m_LocalPosition: {x: -3.0902152, y: 2.5669394, z: 0.5513797}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.6, y: 0.6, z: 0.6}
   m_Children:
   - {fileID: 8217651322430942963}
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: -57.215004, y: -157.718, z: 0}
 --- !u!1 &5574098064837429290
 GameObject:
   m_ObjectHideFlags: 0
@@ -171,7 +122,6 @@ GameObject:
   - component: {fileID: 8863213194156784185}
   - component: {fileID: 458087123233931279}
   - component: {fileID: 6154163000459787510}
-  - component: {fileID: 871464332831462058}
   m_Layer: 2
   m_Name: Leaf
   m_TagString: Untagged
@@ -240,19 +190,6 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
---- !u!65 &871464332831462058
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5574098064837429290}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 4.4001775, y: 2.0703056, z: 2.9967275}
-  m_Center: {x: -0.5083933, y: 0.1542893, z: -0.00000023841878}
 --- !u!1 &8571612889680541038
 GameObject:
   m_ObjectHideFlags: 0

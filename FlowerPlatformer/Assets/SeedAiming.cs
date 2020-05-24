@@ -20,8 +20,7 @@ public class SeedAiming : MonoBehaviour
     [SerializeField] private GameObject realLadder = default;
     [SerializeField] private GameObject ghostPlant = default;
     [SerializeField] private GameObject realPlant = default;
-    private List<GameObject> Plants = default;
-    private int plantIndex = 0;
+    private List<PlantSizeLogic> Props = default;
     [SerializeField] private Slider energyBar = default;
     [SerializeField] private ShittyMovement body = default;
     private bool showAim = false;
@@ -42,7 +41,21 @@ public class SeedAiming : MonoBehaviour
         CheckForTargets(ladder, ladderPlantable, realLadder);
         energyBar.value = energy;
         ShowAim();
-        
+    }
+    private void LateUpdate()
+    {
+        if(Input.GetKeyDown(KeyCode.G))
+            KillAllPlants();
+    }
+
+    private void KillAllPlants()
+    {
+        PlantSizeLogic[] prop = GameObject.FindObjectsOfType<PlantSizeLogic>();
+        foreach (PlantSizeLogic objs in prop)
+        { 
+            Destroy(objs.transform.root.gameObject);
+        }
+        energy = 100f;
     }
 
     private void CheckForTargets(LayerMask filled, LayerMask empty, GameObject prefab)
