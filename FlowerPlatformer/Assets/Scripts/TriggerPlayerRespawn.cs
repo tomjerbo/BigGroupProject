@@ -7,10 +7,8 @@ public class TriggerPlayerRespawn : MonoBehaviour
     [SerializeField] private LayerMask playerMask = default;
     private void OnCollisionEnter(Collision other)
     {
-        print("A");
         if (other.gameObject.layer.Contains(playerMask))
         {
-            print("B");
             GameEvent.instance.PlayerDeath(respawnLocation);
         }
     }

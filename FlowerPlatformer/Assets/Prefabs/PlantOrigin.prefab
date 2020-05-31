@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 3330189348485989309}
   - component: {fileID: 6532799554682474639}
   - component: {fileID: 7767798286520161347}
+  - component: {fileID: 3548320936510731231}
   m_Layer: 15
   m_Name: GrowablePlatform
   m_TagString: Untagged
@@ -129,6 +130,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   size: 0.3
   energy: 0
+--- !u!65 &3548320936510731231
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4922908893557103840}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 9.245203, y: 1.4900004, z: 12.469391}
+  m_Center: {x: 0.4472948, y: 13.1, z: 6.1229515}
 --- !u!1 &5197631767680810312
 GameObject:
   m_ObjectHideFlags: 0
