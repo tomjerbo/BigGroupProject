@@ -5,11 +5,8 @@ using UnityEngine.UI;
 
 public class SeedAiming : MonoBehaviour
 {
-
-    public float energy = 100f;
-    private float growSpeed = 40f;
-    private float plantCost = 30f;
     private float range = 10f;
+    public int plantCharges = 2;
     private Ray checkPlant;
     private Ray checkDirt;
     [SerializeField] private LayerMask plantable = default;
@@ -21,9 +18,12 @@ public class SeedAiming : MonoBehaviour
     [SerializeField] private GameObject ghostPlant = default;
     [SerializeField] private GameObject realPlant = default;
     private List<PlantSizeLogic> Props = default;
-    [SerializeField] private Slider energyBar = default;
     [SerializeField] private ShittyMovement body = default;
     private bool showAim = false;
+    public Image[] charges = default;
+    private Color32 faded = new Color32(53, 190, 86, 30);
+    private Color32 full = new Color32(53, 190, 86, 255);
+   
 
 
     private void AimRaycast()
@@ -39,13 +39,25 @@ public class SeedAiming : MonoBehaviour
         AimRaycast();
         CheckForTargets(plant, plantable, realPlant);
         CheckForTargets(ladder, ladderPlantable, realLadder);
-        energyBar.value = energy;
         ShowAim();
+        PlantChargesUI();
     }
     private void LateUpdate()
     {
         if(Input.GetKeyDown(KeyCode.G))
             KillAllPlants();
+        
+    }
+
+
+    private void PlantChargesUI()
+    {
+        switch(plantCharges)
+        {
+            case 0: charges[0].color = faded; charges[1].color = faded; return;
+            case 1: charges[0].color = full; charges[1].color = faded; return;
+            case 2: charges[0].color = full; charges[1].color = full; return;
+        }
     }
 
     private void KillAllPlants()
@@ -55,7 +67,7 @@ public class SeedAiming : MonoBehaviour
         { 
             Destroy(objs.transform.root.gameObject);
         }
-        energy = 100f;
+        plantCharges = 2;
     }
 
     private void CheckForTargets(LayerMask filled, LayerMask empty, GameObject prefab)
@@ -63,14 +75,12 @@ public class SeedAiming : MonoBehaviour
         if (Physics.Raycast(checkPlant, out RaycastHit hitPlant, range, filled, QueryTriggerInteraction.Collide))
         {
             print("Hit plant");
-            if (Input.GetKey(KeyCode.R) && energy > growSpeed * Time.deltaTime)
+            if (Input.GetKey(KeyCode.R))
             {
                 print("Growing plant");
                 if (hitPlant.collider.GetComponent<PlantSizeLogic>().size < 1)
                 {
                     hitPlant.collider.GetComponent<PlantSizeLogic>().size += 0.7f * Time.deltaTime;
-                    hitPlant.collider.GetComponent<PlantSizeLogic>().energy += growSpeed * Time.deltaTime;
-                    energy -= growSpeed * Time.deltaTime;
                 }
             }
             if(Input.GetKey(KeyCode.E))
@@ -79,14 +89,12 @@ public class SeedAiming : MonoBehaviour
                 if (hitPlant.collider.GetComponent<PlantSizeLogic>().size > 0.3)
                 {
                     hitPlant.collider.GetComponent<PlantSizeLogic>().size -= 0.7f * Time.deltaTime;
-                    hitPlant.collider.GetComponent<PlantSizeLogic>().energy -= growSpeed * Time.deltaTime;
-                    energy += growSpeed * Time.deltaTime;
                 }
             }
-            if (Input.GetMouseButtonDown(1) && !body.OnLadder())
+            if (Input.GetMouseButtonDown(1))
             {
-                energy += hitPlant.collider.GetComponent<PlantSizeLogic>().energy + plantCost;
                 Destroy(hitPlant.collider.gameObject);
+                plantCharges++;
             }
         }
         else
@@ -94,16 +102,16 @@ public class SeedAiming : MonoBehaviour
             if (Physics.Raycast(checkDirt, out RaycastHit hitDirt, range, empty, QueryTriggerInteraction.Collide))
             {
                 print("Hit dirt");
-                if (Input.GetMouseButtonDown(0) & energy >= plantCost)
+                if (Input.GetMouseButtonDown(0) & plantCharges > 0)
                 {
                     print("Planting");
                     Plant(hitDirt, prefab);
                 }
-                else
-                {
-                    if (energy < plantCost)
-                        print("Not enough energy to plant another tree.");
-                }
+                //else
+                //{
+                //    if (energy < plantCost)
+                //        print("Not enough energy to plant another tree.");
+                //}
             }
         }
     }
@@ -148,8 +156,7 @@ public class SeedAiming : MonoBehaviour
     private void Plant(RaycastHit hitDirt, GameObject obj)
     {
         Instantiate(obj, hitDirt.point, Quaternion.LookRotation(hitDirt.normal, Vector3.up));
-        energy -= plantCost;
-        if (showAim) showAim = false;
+        plantCharges--;
     }
 
 
