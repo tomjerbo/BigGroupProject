@@ -94,7 +94,7 @@ public class SeedAiming : MonoBehaviour
             if (Physics.Raycast(checkDirt, out RaycastHit hitDirt, range, empty, QueryTriggerInteraction.Collide))
             {
                 print("Hit dirt");
-                if (Input.GetMouseButtonDown(0) & energy >= plantCost)
+                if (Input.GetMouseButtonDown(0) & energy >= plantCost && showAim)
                 {
                     print("Planting");
                     Plant(hitDirt, prefab);
@@ -149,6 +149,7 @@ public class SeedAiming : MonoBehaviour
     {
         Instantiate(obj, hitDirt.point, Quaternion.LookRotation(hitDirt.normal, Vector3.up));
         energy -= plantCost;
+        if (showAim) showAim = false;
     }
 
 
