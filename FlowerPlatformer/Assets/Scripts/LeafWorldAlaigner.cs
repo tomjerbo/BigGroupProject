@@ -9,7 +9,6 @@ public class LeafWorldAlaigner : MonoBehaviour
 
     void Update()
     {
-        
         rot = Quaternion.LookRotation(Vector3.ProjectOnPlane(stem.forward, Vector3.up), Vector3.up);
         transform.rotation = rot;
     }
