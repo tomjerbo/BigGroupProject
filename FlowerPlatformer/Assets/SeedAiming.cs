@@ -9,7 +9,7 @@ public class SeedAiming : MonoBehaviour
     public float energy = 100f;
     private float growSpeed = 40f;
     private float plantCost = 30f;
-    private float range = 15f;
+    private float range = 10f;
     private Ray checkPlant;
     private Ray checkDirt;
     [SerializeField] private LayerMask plantable = default;
@@ -94,7 +94,7 @@ public class SeedAiming : MonoBehaviour
             if (Physics.Raycast(checkDirt, out RaycastHit hitDirt, range, empty, QueryTriggerInteraction.Collide))
             {
                 print("Hit dirt");
-                if (Input.GetMouseButtonDown(0) & energy >= plantCost && showAim)
+                if (Input.GetMouseButtonDown(0) & energy >= plantCost)
                 {
                     print("Planting");
                     Plant(hitDirt, prefab);
@@ -112,9 +112,9 @@ public class SeedAiming : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.F))
             showAim = !showAim;
-
-        if (showAim)
-        {
+        
+        //if (showAim)
+        //{
             if (Physics.Raycast(checkPlant, out RaycastHit fakePlant, range, plantable, QueryTriggerInteraction.Collide))
             {
                 ghostPlant.SetActive(true);
@@ -135,12 +135,12 @@ public class SeedAiming : MonoBehaviour
             {
                 ghostLadder.SetActive(false);
             }
-        }
-        else
-        {
-            ghostPlant.SetActive(false);
-            ghostLadder.SetActive(false);
-        }
+        //}
+        //else
+        //{
+        //    ghostPlant.SetActive(false);
+        //    ghostLadder.SetActive(false);
+        //}
     }
 
 
