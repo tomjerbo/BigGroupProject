@@ -21,7 +21,15 @@ public class ShittyMovement : MonoBehaviour
     {
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
-        //Screen.SetResolution(1920, 1080, true);
+    }
+    private void Start()
+    {
+        GameEvent.instance.OnPlayerDeath += Respawn;
+    }
+
+    private void Respawn(Transform location)
+    {
+        transform.position = location.position;
     }
 
     private void Update()

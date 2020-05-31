@@ -381,10 +381,20 @@ MonoBehaviour:
   plant:
     serializedVersion: 2
     m_Bits: 32768
+  ladderPlantable:
+    serializedVersion: 2
+    m_Bits: 65536
+  ladder:
+    serializedVersion: 2
+    m_Bits: 1024
+  ghostLadder: {fileID: 0}
+  realLadder: {fileID: 3054219178932056937, guid: 8dd7ec88985026447af05b5700ff0284,
+    type: 3}
   ghostPlant: {fileID: 0}
-  realPlant: {fileID: 5436786752325500472, guid: 51e1e5da9c646b041b2ebcca0f90b161,
+  realPlant: {fileID: 5197631767680810312, guid: c5fdf05201d9bd44a9d6be2c69c998d5,
     type: 3}
   energyBar: {fileID: 759383656963652869}
+  body: {fileID: 759383658330243717}
 --- !u!1 &759383656945880116
 GameObject:
   m_ObjectHideFlags: 0
@@ -764,7 +774,7 @@ GameObject:
   - component: {fileID: 759383658330243719}
   - component: {fileID: 759383658330243716}
   - component: {fileID: 759383658330243717}
-  m_Layer: 0
+  m_Layer: 17
   m_Name: _PlayerBody
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -778,7 +788,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 759383658330243714}
-  m_LocalRotation: {x: -0, y: -0.14547937, z: -0, w: 0.9893613}
+  m_LocalRotation: {x: 0, y: -0.14547877, z: 0, w: 0.9893614}
   m_LocalPosition: {x: -2.05, y: 2.75, z: -5.65}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -793,7 +803,7 @@ MeshFilter:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 759383658330243714}
-  m_Mesh: {fileID: 0}
+  m_Mesh: {fileID: 10208, guid: 0000000000000000e000000000000000, type: 0}
 --- !u!23 &759383658330243718
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -880,6 +890,9 @@ MonoBehaviour:
   rb: {fileID: 759383658330243716}
   home: {fileID: 759383657461628630}
   jumpForce: 8
+  jumpableLayers:
+    serializedVersion: 2
+    m_Bits: 38400
 --- !u!1 &759383658380333521
 GameObject:
   m_ObjectHideFlags: 0

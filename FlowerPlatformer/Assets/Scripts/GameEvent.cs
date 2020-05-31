@@ -14,8 +14,7 @@ public class GameEvent : MonoBehaviour
     public event Action OnDoorProgressTrigger;
     public void DoorProgressTrigger()
     {
-        if (OnDoorProgressTrigger != null)
-            OnDoorProgressTrigger();
+        OnDoorProgressTrigger?.Invoke();
     }
 
 
@@ -23,7 +22,12 @@ public class GameEvent : MonoBehaviour
 
     public void RemoveOldPlants()
     {
-        if (OnRemoveOldPlants != null)
-            OnRemoveOldPlants();
+        OnRemoveOldPlants?.Invoke();
+    }
+
+    public event Action<Transform> OnPlayerDeath;
+    public void PlayerDeath(Transform location)
+    {
+        OnPlayerDeath?.Invoke(location);
     }
 }
