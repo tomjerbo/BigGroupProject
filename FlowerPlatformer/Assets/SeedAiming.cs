@@ -23,7 +23,6 @@ public class SeedAiming : MonoBehaviour
     public Image[] charges = default;
     private Color32 faded = new Color32(53, 190, 86, 30);
     private Color32 full = new Color32(53, 190, 86, 255);
-   
 
 
     private void AimRaycast()
@@ -68,6 +67,8 @@ public class SeedAiming : MonoBehaviour
             Destroy(objs.transform.root.gameObject);
         }
         plantCharges = 2;
+        //Invoke("DeLadder", 0.1f);
+        DeLadder();
     }
 
     private void CheckForTargets(LayerMask filled, LayerMask empty, GameObject prefab)
@@ -95,6 +96,8 @@ public class SeedAiming : MonoBehaviour
             {
                 Destroy(hitPlant.collider.gameObject);
                 plantCharges++;
+                //Invoke("DeLadder", 0.1f);
+                DeLadder();
             }
         }
         else
@@ -159,7 +162,11 @@ public class SeedAiming : MonoBehaviour
         plantCharges--;
     }
 
-
+    private void DeLadder()
+    {
+        body.onLadder = false;
+        body.rb.useGravity = true;
+    }
 
 
 
