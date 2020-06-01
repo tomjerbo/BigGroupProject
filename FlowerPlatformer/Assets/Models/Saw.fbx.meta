@@ -3,7 +3,17 @@ guid: 37595bd518f57c248bdb858d4f60e804
 ModelImporter:
   serializedVersion: 19300
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Rotater
+    second: {fileID: 2100000, guid: 7a3d7f11d67af7642912e155b91005a2, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Sawblade
+    second: {fileID: 2100000, guid: 601a8ae020fb1bf4682275a7fd3ace9f, type: 2}
   materials:
     materialImportMode: 1
     materialName: 0
@@ -80,7 +90,7 @@ ModelImporter:
     armStretch: 0.05
     legStretch: 0.05
     feetSpacing: 0
-    globalScale: 1
+    globalScale: 100
     rootMotionBoneName: 
     hasTranslationDoF: 0
     hasExtraRoot: 0
