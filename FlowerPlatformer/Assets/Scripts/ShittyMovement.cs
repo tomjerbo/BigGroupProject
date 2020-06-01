@@ -8,15 +8,15 @@ public class ShittyMovement : MonoBehaviour
 {
     [SerializeField] private float moveSpeed = 10f;
     [SerializeField] private float rotSpeed = 100f;
-    [SerializeField] private Rigidbody rb = default;
+    [SerializeField] public Rigidbody rb = default;
     [SerializeField] private Transform home = default;
     [SerializeField] private float jumpForce = 8f;
     [SerializeField] private LayerMask jumpableLayers = default;
     private float jumpCD = 0.2f;
     private float jumpTimer = 0f;
     private bool canJump = true;
-    private bool onLadder = false;
-    public bool OnLadder() { return onLadder; }
+    public bool onLadder = false;
+    
     private void Awake()
     {
         Cursor.lockState = CursorLockMode.Locked;
@@ -46,6 +46,7 @@ public class ShittyMovement : MonoBehaviour
         {
             jumpTimer -= Time.deltaTime;
         }
+        print("Can jump = " + canJump);
     }
     void FixedUpdate()
     {
@@ -101,9 +102,8 @@ public class ShittyMovement : MonoBehaviour
         for (int i = 0; i < hits.Length; i++)
         {
             if (hits[i].collider.gameObject.layer.Contains(jumpableLayers))
-            { 
-                canJump = true; 
-                //print("Can Jump");
+            {
+                canJump = true;
             }
         }
     }
