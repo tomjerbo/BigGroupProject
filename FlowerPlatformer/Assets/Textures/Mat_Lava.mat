@@ -36,11 +36,7 @@ Material:
     - _BaseMap:
         m_Texture: {fileID: 2800000, guid: ee7021ffc86028046a1077a01c2b0468, type: 3}
         m_Scale: {x: 15, y: 15}
-<<<<<<< HEAD
         m_Offset: {x: -0.06470479, y: 0.32562232}
-=======
-        m_Offset: {x: -0.06656005, y: 0.37050506}
->>>>>>> parent of 4474218... Merge branch 'master' of https://github.com/tomjerbo/BigGroupProject
     - _BumpMap:
         m_Texture: {fileID: 2800000, guid: 951e3590a9799e544a64c71a463b918d, type: 3}
         m_Scale: {x: 1, y: 1}

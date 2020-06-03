@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<objects serializationModel="Studio.02.01.00">
+	<object class="AudioFile" id="{db898ccc-ab05-4c64-96ff-fd4285a3b003}">
+		<property name="assetPath">
+			<value>BigButton.wav</value>
+		</property>
+		<property name="frequencyInKHz">
+			<value>11.0249996</value>
+		</property>
+		<property name="channelCount">
+			<value>1</value>
+		</property>
+		<property name="length">
+			<value>3.2455328798185943</value>
+		</property>
+		<relationship name="masterAssetFolder">
+			<destination>{95c7efcd-5fba-4459-8649-b9a6a2c4c36c}</destination>
+		</relationship>
+	</object>
+</objects>
