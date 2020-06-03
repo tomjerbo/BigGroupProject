@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<objects serializationModel="Studio.02.01.00">
+	<object class="AudioFile" id="{2023d7d5-f317-4150-9f9c-e6f8b3ca7a96}">
+		<property name="assetPath">
+			<value>jungle_loop.wav</value>
+		</property>
+		<property name="isStreaming">
+			<value>true</value>
+		</property>
+		<property name="frequencyInKHz">
+			<value>44.0999985</value>
+		</property>
+		<property name="channelCount">
+			<value>2</value>
+		</property>
+		<property name="length">
+			<value>16.295306122448981</value>
+		</property>
+		<relationship name="masterAssetFolder">
+			<destination>{95c7efcd-5fba-4459-8649-b9a6a2c4c36c}</destination>
+		</relationship>
+	</object>
+</objects>
