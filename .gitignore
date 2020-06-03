@@ -60,6 +60,3 @@ crashlytics-build.properties
 
 FlowerPlatformer/ProjectSettings/QualitySettings.asset
 FlowerPlatformer/ProjectSettings/QualitySettings.asset
-*.meta
-*.meta
-FlowerPlatformer/Assets/Editor Default Resources/FMOD.meta
